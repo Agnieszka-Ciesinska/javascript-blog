@@ -22,6 +22,11 @@ body {
   font-weight: 300;
   font-size: 16px;
   line-height: 1.7;
+  background-color:  #ffd1b3;
+}
+
+.wrapper .sidebar {
+    background-color: #FBF2F6;
 }
 
 .container {
@@ -40,7 +45,6 @@ body {
     color: lighten($color-dark, 20%);
   }
 }
-
 /* Layout */
 
 .wrapper {
@@ -60,7 +64,7 @@ body {
   background: $color-light;
   margin-right: 10px;
   padding: 40px;
-  border: 1px solid $color-dark;
+  border: 1px solid $color-light;
   border-radius: 5px;
 }
 
@@ -100,7 +104,6 @@ body {
 }
 
 /* Post */
-
 .post {
   display: none;
   &.active {
