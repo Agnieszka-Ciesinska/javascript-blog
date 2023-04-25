@@ -44,10 +44,10 @@ function titleClickHandler(event){
 
 //GENERATE TITLE LIST 
 
-const optArticleSelector = '.post',
-  optTitleSelector = '.post-title',
-  optTitleListSelector = '.titles',
-  optTagsListSelector = '.list.tags';
+const optArticleSelector = '.post';
+const optTitleSelector = '.post-title';
+const optTitleListSelector = '.titles';
+const optArticleTagsSelector = '.post-tags .list';
 
 function generateTitleLinks(){
   console.log();
@@ -100,3 +100,143 @@ console.log(links);
 for(let link of links){
   link.addEventListener('click', titleClickHandler);
 }
+
+//***************************** Part III *********************************************************************************
+
+function generateTags(){
+
+  /* find all articles */
+
+  const articles = document.querySelectorAll(optArticleSelector);
+
+  
+  /* START LOOP: for every article: */
+  
+  for(let article of articles){
+  
+
+    /* find tags wrapper */
+
+    const tagsWrapper = article.querySelector(optArticleTagsSelector);
+    console.log(tagsWrapper);
+
+    /* make html variable with empty string */
+
+    let html = '';
+  
+    /* get tags from data-tags attribute */
+
+    const articleTags = article.getAttribute('.data-tags');
+    console.log(articleTags);
+  
+    /* split tags into array */
+
+    const articleTagsArray = articleTags.split(' ');
+    console.log(articleTagsArray);
+  
+    /* START LOOP: for each tag */
+  
+    for(let tag of articleTagsArray){
+      console.log(tag);
+
+      /* generate HTML of the link */
+
+      const linkHTML = '<li><a href="#tag-' + tag +'">' + tag + '</a></li>';
+      console.log(linkHTML);
+  
+      /* add generated code to html variable */
+
+      html = html + linkHTML;
+      console.log(html);
+  
+      /* END LOOP: for each tag */
+  
+    }
+    /* insert HTML of all the links into the tags wrapper */
+
+    tagsWrapper.insertAdjacentHTML('beforeend', linkHTML);
+
+  
+  /* END LOOP: for every article: */
+  }
+}
+
+/************************************* Part IV *********************************************************************** */
+
+generateTags();
+
+function tagClickHandler(event){
+
+  /* prevent default action for this event */
+
+  event.preventDefault();
+  
+  /* make new constant named "clickedElement" and give it the value of "this" */
+
+  const clickedElement = this;
+  console.log('Link was clicked!');
+  
+  /* make a new constant "href" and read the attribute "href" of the clicked element */
+
+  const href = clickedElement.getAttribute('href');
+  console.log(href);
+  
+  /* make a new constant "tag" and extract tag from the "href" constant */
+
+  const tag = href.replace('#tag-', '');
+  console.log(tag);
+  
+  /* find all tag links with class active */
+
+  const activeTags = document.querySelectorAll('a.active[href^="#tag-"]');
+  console.log(activeTags);
+  
+  /* START LOOP: for each active tag link */
+
+  for(let activeTag of activeTags){
+    console.log(activeTag);
+  
+    /* remove class active */
+
+    activeTag.classList.remove('active');
+    
+    /* END LOOP: for each active tag link */
+
+  }
+  
+  /* find all tag links with "href" attribute equal to the "href" constant */
+
+  const tagLinks = document.querySelectorAll.('a[href="' + href + '"]'); //querySelectorAll czy getAttribute?
+  console.log(tagLinks);
+  
+  /* START LOOP: for each found tag link */
+
+  for(let tagLink of tagLinks){
+    console.log(tagLink);
+  
+  /* add class active */
+
+    tagLink.classList.add('active');
+  
+  /* END LOOP: for each found tag link */
+  }
+  
+  /* execute function "generateTitleLinks" with article selector as argument */
+
+  generateTitleLinks('[data-tags~="' + tag + '"]');
+
+}
+  
+/********************************** Part V ******************************************************************************* */
+
+function addClickListenersToTags(){
+  /* find all links to tags */
+  
+  /* START LOOP: for each link */
+  
+  /* add tagClickHandler as event listener for that link */
+  
+  /* END LOOP: for each link */
+}
+  
+addClickListenersToTags();
