@@ -51,7 +51,8 @@ const optTitleSelector = '.post-title';
 const optTitleListSelector = '.titles';
 const optArticleTagsSelector = '.post-tags .list';
 
-function generateTitleLinks(){
+function generateTitleLinks(customSelector = ''){
+
   console.log();
 
   /* [DONE] remove contents of titleList */
@@ -62,7 +63,9 @@ function generateTitleLinks(){
 
   let html = '';
 
-  const articles = document.querySelectorAll(optArticleSelector);
+  console.log('Value of customSelector:' + customSelector);
+
+  const articles = document.querySelectorAll(optArticleSelector + customSelector);
 
   for(let article of articles){
       
@@ -122,8 +125,6 @@ function generateTags(){
     const tagsWrapper = article.querySelector(optArticleTagsSelector);
     console.log(tagsWrapper);
 
-    /*nie skasowałam problematycznej zmiennej, a mniej więcej w tym momencie zniknęła mi znowu lewa kolumna strony*/
-
     /* make html variable with empty string */
 
     let html = '';
@@ -159,7 +160,7 @@ function generateTags(){
 
     /* insert HTML of all the links into the tags wrapper */
 
-    tagsWrapper.insertAdjacentHTML('beforeend', linkHTML);
+    tagsWrapper.innerHTML = html;
 
     /* END LOOP: for every article: */
 
@@ -168,6 +169,7 @@ function generateTags(){
 }
 
 generateTags();
+
 //******************************************************************************************************************************
 //TAG CLICK HANDLER
 
@@ -238,20 +240,22 @@ function tagClickHandler(event){
 //CLICK LISTENERS TO TAGS
 
 function addClickListenersToTags(){
-    
+
   /* find all links to tags */
 
-  tagLinks
+  const allTagLinks = document.querySelectorAll('a[href="' + href + '"]');
+  console.log(allTagLinks);
 
   /* START LOOP: for each link */
 
+  for(let link of allTagLinks){
 
+    /* add tagClickHandler as event listener for that link */
 
-  /* add tagClickHandler as event listener for that link */
-
-
+    link.addEventListener('click', tagClickHandler);
 
   /* END LOOP: for each link */
+  }
 }
 
 addClickListenersToTags();
