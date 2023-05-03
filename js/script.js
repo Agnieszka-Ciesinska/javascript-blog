@@ -108,7 +108,12 @@ for(let link of links){
 //*********************************************************************************************************************************/
 /*GENERATE TAGS */
 
+const optTagsListSelector = '.tags .list';
+
 function generateTags(){
+
+  /* [NEW] create a new variable allTags with an empty object */
+  let allTags = {};
 
   /* find all articles */
 
@@ -123,8 +128,6 @@ function generateTags(){
 
     const tagsWrapper = article.querySelector(optArticleTagsSelector);
     console.log(tagsWrapper);
-
-    /*nie skasowałam problematycznej zmiennej, a mniej więcej w tym momencie zniknęła mi znowu lewa kolumna strony*/
 
     /* make html variable with empty string */
 
@@ -155,6 +158,17 @@ function generateTags(){
       html = html + linkHTML;
       console.log(html);
 
+      /* [NEW] check if this link is NOT already in allTags */
+
+      if(!allTags.hasOwnProperty(tag)){
+
+        /* [NEW] add tag to allTags object */
+
+        allTags[tag]= 1;
+      } else {
+        allTags[tag]++;
+      }
+
       /* END LOOP: for each tag */
 
     }
@@ -167,7 +181,32 @@ function generateTags(){
 
   }
 
+  /* [NEW] find list of tags in right column */
+  const tagList = document.querySelector(optTagsListSelector);
+  console.log(tagList);
+
+  /* [NEW] create variable for all links HTML code */
+
+  let allTagsHTML = '';
+
+  /* [NEW] START LOOP: for each tag in allTags */
+  
+  for(let tag in allTags){
+    /*[NEW] generate code of a link and add it to allTagsHTML */
+
+    //allTagsHTML += tag + ' (' + allTags[tag] + ') '; - wyświetla jedynie nazwę tagu oraz liczbę jego wystąpień */
+    allTagsHTML += '<li><a href="#tag-' + tag + ' ('+ allTags[tag] + ')</a></li>';
+
+  }
+
+  /*[NEW] END LOOP: for each tag in allTags */
+
+  /*[NEW] add html from allTagsHTML to tagList */
+  
+  tagList.innerHTML = allTagsHTML;
+
 }
+
 
 generateTags();
 //******************************************************************************************************************************
@@ -287,8 +326,9 @@ function generateAuthors(){
     /* get author from data-author attribute */
 
     const author = article.getAttribute('data-author');
+    console.log(author);
 
-    /* generate HTML of the link */
+    /* insert HTML of all the links into the author wrapper */
 
     const linkHTML = '<li><a href="#author-' + author + '"><span>' + author + '</span></a></li>';
 
@@ -296,7 +336,7 @@ function generateAuthors(){
 
     html = linkHTML;
 
-    /*insert HTML into author wrapper */
+    /*insert HTML of all the links into the tags wrapper */
 
     authorWrapper.innerHTML = html;
 
@@ -391,4 +431,4 @@ function addClickListenersToAuthors(){
 
 addClickListenersToAuthors();
 
-//**************************************************************************************************
+//*************************************TAGS CLOUD*************************************************************
