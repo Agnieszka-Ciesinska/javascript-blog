@@ -42,6 +42,15 @@ function titleClickHandler(event){
 
 }
 
+/**************************************addEventListenerToTitleLinks - nowa funkcja *********************** */
+function addEventListenerToTitleLinks(){
+  const links = document.querySelectorAll('.titles a');
+  //console.log(links);
+
+  for(let link of links){
+    link.addEventListener('click', titleClickHandler);
+  }
+}
 //*********************************************************************************************************************************** */
 
 //GENERATE TITLE LIST 
@@ -95,17 +104,16 @@ function generateTitleLinks(customSelector = ''){
   }
 
   titleList.innerHTML = html;
-
+  addEventListenerToTitleLinks();
 }
-
 generateTitleLinks();
 
-const links = document.querySelectorAll('.titles a');
+/*const links = document.querySelectorAll('.titles a');
 //console.log(links);
 
 for(let link of links){
   link.addEventListener('click', titleClickHandler);
-}
+}*/
 //****************************************************FUNCTION CALCULATE TAGS PARAMS********************************************
 function calculateTagsParams(tags){
   const params = {
@@ -228,7 +236,7 @@ function generateTags(){
   /*[NEW] generate code of a link and add it to allTagsHTML */
     //allTagsHTML += tag + ' (' + allTags[tag] + ') '; - wyświetla jedynie nazwę tagu oraz liczbę jego wystąpień */
     //allTagsHTML += '<li><a href="#tag-' + tag + ' ('+ allTags[tag] + ')</a></li>'; - tak myślałam żeby zrobić aby wygenerować link html.
-    const tagLinkHTML = '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '"> ' + tag + '</a></li>';
+    const tagLinkHTML = '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '"> ' + tag + ' (' + allTags[tag] + ')</a></li>';
     allTagsHTML += tagLinkHTML;
 
     /*[NEW] END LOOP: for each tag in allTags */
@@ -401,7 +409,7 @@ function authorClickHandler(event){
    
   /*  make a new constant "author" and extract author from the "href" constant */
   
-  const author = author.replace('#author-', '');
+  const author = href.replace('#author-', '');
   //console.log(author);
   
   /* find all author links with class active */
