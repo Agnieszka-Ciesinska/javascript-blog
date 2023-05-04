@@ -45,6 +45,38 @@ body {
     color: lighten($color-dark, 20%);
   }
 }
+
+.tag-size-1 {
+  font-size: 15px;
+  color:#ff8f66  ;
+  display: inline;
+}
+
+.tag-size-2 {
+  font-size: 17px;
+  color:  #ff7f50;
+  display: inline;
+}
+
+.tag-size-3 {
+  font-size: 19px;
+  color:  #ff6933;
+  display: inline;
+}
+
+.tag-size-4 {
+  font-size: 21px;
+  color: #ff571a;
+  display: inline;
+}
+
+.tag-size-5 {
+  font-size: 23px;
+  color: #e63d00;
+  display: inline;
+}
+
+
 /* Layout */
 
 .wrapper {
