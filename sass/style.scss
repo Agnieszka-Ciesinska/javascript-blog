@@ -49,33 +49,60 @@ body {
 .tag-size-1 {
   font-size: 15px;
   color:#ff8f66  ;
-  display: inline;
 }
 
 .tag-size-2 {
   font-size: 17px;
   color:  #ff7f50;
-  display: inline;
 }
 
 .tag-size-3 {
   font-size: 19px;
   color:  #ff6933;
-  display: inline;
 }
 
 .tag-size-4 {
   font-size: 20px;
   color: #ff571a;
-  display: inline;
 }
 
 .tag-size-5 {
   font-size: 20px;
   color:#ff4400;
+}
+
+.tags li {
   display: inline;
 }
 
+.authors span {
+  color: #ff4400;
+}
+
+.authors a {
+  text-decoration: none;
+}
+
+.titles span {
+  color: #ff4400;
+}
+
+.titles a {
+  text-decoration: none;
+}
+
+.tags a {
+  text-decoration: none;
+}
+
+.post-author li {
+  list-style-type: none;
+}
+
+.post-author a {
+  color: #ff4400;
+  text-decoration: none;
+}
 
 /* Layout */
 

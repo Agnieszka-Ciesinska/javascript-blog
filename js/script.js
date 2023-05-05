@@ -344,8 +344,13 @@ addClickListenersToTags();
 //********************************************************************************************************************************
 
 const optArticleAuthorSelector = '.post-author';
+const optAuthorsListSelector = '.authors.list';
 
 function generateAuthors(){
+
+  /* [NEW] create a new variable allAuthors with an empty object */
+
+  let allAuthors ={};
 
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
@@ -366,24 +371,55 @@ function generateAuthors(){
 
     /* get author from data-author attribute */
 
-    const author = article.getAttribute('data-author');
+    const articleAuthor = article.getAttribute('data-author');
     //console.log(author);
 
     /* insert HTML of all the links into the author wrapper */
 
-    const linkHTML = '<li><a href="#author-' + author + '"><span>' + author + '</span></a></li>';
+    const linkHTML = '<li><a href="#author-' + articleAuthor + '"><span>' + articleAuthor + '</span></a></li>';
 
     /*add generated code to html variable */
 
     html = linkHTML;
 
-    /*insert HTML of all the links into the tags wrapper */
+    /* [NEW] check if this link is not altready in allAuthors */
+
+    if(!allAuthors.hasOwnProperty(articleAuthor)){
+      allAuthors[articleAuthor] = 1;
+    } else {
+      allAuthors[articleAuthor]++;
+    }
+
+    /*  */
+
+    /*insert HTML of all the links into the author wrapper */
 
     authorWrapper.innerHTML = html;
 
     /* END LOOP: for every article: */
 
   }
+
+  /* [NEW] ffind list of authors in right column */
+
+  const authorsList = document.querySelector(optAuthorsListSelector);
+  console.log(authorsList);
+
+  /*[NEW] create variable for all links HTML code */
+  
+  let allAuthorsHTML = '';
+
+  /* [NEW]  START LOOP: for each author in allAuthors */
+  for(let author in allAuthors){
+
+    allAuthorsHTML += '<li><a href="#author-' + author + '"><span>' + author + ' (' + allAuthors[author] + ')</span></a></li>';
+    console.log(allAuthorsHTML);
+
+    /* [NEW] END LOOP: for each author in allAuthors */
+  
+  }
+
+  authorsList.innerHTML = allAuthorsHTML;
 
 }
 
